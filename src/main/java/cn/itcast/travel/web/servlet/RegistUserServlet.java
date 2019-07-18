@@ -22,7 +22,7 @@ public class RegistUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        //验证校验
+        //验证校验码
         String check = request.getParameter("check");
         //从sesion中获取验证码
         HttpSession session = request.getSession();
