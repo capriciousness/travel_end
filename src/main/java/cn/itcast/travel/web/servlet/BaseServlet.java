@@ -17,12 +17,12 @@ public class BaseServlet extends HttpServlet {
         //完成方法分发
         //1.获取请求路径
         String uri = req.getRequestURI();
-        System.out.println("请求uri:"+uri);
+        //System.out.println("请求uri:"+uri);
         //2.获取方法名称
         String methodName = uri.substring(uri.lastIndexOf('/') + 1);
         System.out.println("方法名称:"+methodName);
         //3.获取方法对象Method
-        System.out.println(this);//cn.itcast.travel.web.servlet.UserServlet@38ad0b1f
+        //System.out.println(this);//cn.itcast.travel.web.servlet.UserServlet@38ad0b1f
         try {
             ////忽略方法的访问权限不妥，私有方法也会被访问
             Method method = this.getClass().getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
