@@ -1,4 +1,4 @@
-package cn.itcast.travel.web.servlet;
+package cn.itcast.travel.web.servlet.servlet_back;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;

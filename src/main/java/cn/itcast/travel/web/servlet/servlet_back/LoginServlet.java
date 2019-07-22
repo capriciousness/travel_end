@@ -1,4 +1,4 @@
-package cn.itcast.travel.web.servlet;
+package cn.itcast.travel.web.servlet.servlet_back;
 
 import cn.itcast.travel.domain.ResultInfo;
 import cn.itcast.travel.domain.User;
