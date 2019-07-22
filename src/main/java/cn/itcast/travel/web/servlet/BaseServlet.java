@@ -1,5 +1,6 @@
 package cn.itcast.travel.web.servlet;
 
+import cn.itcast.travel.domain.ResultInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
@@ -7,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -43,7 +45,7 @@ public class BaseServlet extends HttpServlet {
     }
 
     /**
-     * 序列化
+     * 序列化序列化并响应客户端
      * @param o
      * @param response
      * @throws IOException
@@ -55,11 +57,43 @@ public class BaseServlet extends HttpServlet {
 
     }
 
+    /**
+     * 序列化并响应客户端
+     * @param o
+     * @param response
+     * @throws IOException
+     */
     public void writeValueAsString(Object o, HttpServletResponse response) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(o);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(json);
 
+    }
+
+    /**
+     * 校验验证码
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    public void checkCode(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        //验证校验码
+        String check = request.getParameter("check");
+        //从sesion中获取验证码
+        HttpSession session = request.getSession();
+        String checkcode_server = (String) session.getAttribute("CHECKCODE_SERVER");
+        session.removeAttribute("CHECKCODE_SERVER");//为了保证验证码只能使用一次
+        //比较
+        if(checkcode_server == null || !checkcode_server.equalsIgnoreCase(check)){
+            //验证码错误
+            ResultInfo info = new ResultInfo();
+            //登录失败
+            info.setFlag(false);
+            info.setErrorMsg("验证码错误");
+            //将info对象序列化为json
+            writeValueAsString(info,response);
+            return;
+        }
     }
 }
