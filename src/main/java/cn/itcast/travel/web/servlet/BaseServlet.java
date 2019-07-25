@@ -25,8 +25,8 @@ public class BaseServlet extends HttpServlet {
         //2.获取方法名称
         String methodName = uri.substring(uri.lastIndexOf('/') + 1);
         System.out.println("方法名称:"+methodName);
-        //3.获取方法对象Method
-        System.out.println(this);//cn.itcast.travel.web.servlet.UserServlet@38ad0b1f
+        //3.获取方法对象Method,注意this，谁调用，就是谁的对象
+        //System.out.println(this);//cn.itcast.travel.web.servlet.UserServlet@38ad0b1f
         try {
             ////忽略方法的访问权限不妥，私有方法也会被访问
             Method method = this.getClass().getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);

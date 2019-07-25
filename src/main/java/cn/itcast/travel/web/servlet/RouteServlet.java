@@ -16,13 +16,13 @@ import java.io.IOException;
 public class RouteServlet extends BaseServlet {
     private RouteService service = new RouteServiceImpl();
     //分页展示分类条目
-    protected void pageQuery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void pageQuery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //1.获取参数
         String currentPageStr = request.getParameter("currentPage");
         String pageSizeStr = request.getParameter("pageSize");
         String cidStr = request.getParameter("cid");
         //2.参数处理
-        int cid = 0;
+        int cid = 1;
         if(cidStr!=null && cidStr.length()>0){
             cid = Integer.parseInt(cidStr);
         }
@@ -33,7 +33,7 @@ public class RouteServlet extends BaseServlet {
             currentPage = 1;
         }
         int pageSize = 0;   //每页显示条数，若没传递，默认五条
-        if(currentPageStr!=null && currentPageStr.length()>0){
+        if(pageSizeStr!=null && pageSizeStr.length()>0){
             pageSize = Integer.parseInt(pageSizeStr);
         }else{
             pageSize = 5;
