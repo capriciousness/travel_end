@@ -16,6 +16,7 @@ import java.util.List;
 public class CategoryServlet extends BaseServlet {
     //声明service的业务对象
     private CategoryService service = new CategoryServiceImpl();
+
     public void findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //1.调用service
         List<Category> cs = service.findAll();
@@ -26,7 +27,5 @@ public class CategoryServlet extends BaseServlet {
         writeValue(cs,response);
     }
 
-    public void find(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("CategoryServlet的find方法...");
-    }
+
 }
