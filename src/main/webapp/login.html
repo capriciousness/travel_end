@@ -62,11 +62,11 @@
         			<input name="password" type="text" placeholder="请输入密码" autocomplete="off">
         			<div class="verify">
 					<input name="check" type="text" placeholder="请输入验证码" autocomplete="off">
-					<span><img src="checkCode" alt="" onclick="changeCheckCode(this)"></span>
+					<span><img src="user/checkCode" alt="" onclick="changeCheckCode(this)"></span>
 					<script type="text/javascript">
 						//图片点击事件
 						function changeCheckCode(img) {
-							img.src="checkCode?"+new Date().getTime();
+							img.src="user/checkCode?"+new Date().getTime();
 						}
 					</script>
 			</div>

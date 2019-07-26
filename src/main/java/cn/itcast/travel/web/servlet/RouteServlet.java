@@ -26,13 +26,13 @@ public class RouteServlet extends BaseServlet {
 
         //2.参数处理
         String rname = null;
-        if(rnameStr!=null && rnameStr.length()>0){
+        if(rnameStr!=null && rnameStr.length()>0 && !"null".equals(rnameStr)){
             //tomcat8自动处理了get 请求的乱码，默认为UTF-8,
             //而tomcat7默认为iso-8859-1
             rname = new String(rnameStr.getBytes("iso-8859-1"),"utf-8");
         }
         int cid = 0;
-        if(cidStr!=null && cidStr.length()>0 && "null".equals(cid)){
+        if(cidStr!=null && cidStr.length()>0 && !"null".equals(cidStr)){
             cid = Integer.parseInt(cidStr);
         }
         int currentPage = 0;    //当前页码，若没传递，默认第一页

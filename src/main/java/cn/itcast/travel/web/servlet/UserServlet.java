@@ -32,7 +32,7 @@ public class UserServlet extends BaseServlet {
      */
     public void regist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //0.验证校验码
-        checkCode(request, response);
+        check_Code(request, response);
 
         //1.获取数据
         Map<String, String[]> map = request.getParameterMap();
@@ -82,7 +82,7 @@ public class UserServlet extends BaseServlet {
      */
     public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //0.校验验证码
-        checkCode(request, response);
+        check_Code(request, response);
         //1.根据用户名和密码获取用户信息
         Map<String, String[]> map = request.getParameterMap();
         //2.封装数据
