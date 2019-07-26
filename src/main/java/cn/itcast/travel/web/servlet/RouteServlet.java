@@ -31,8 +31,8 @@ public class RouteServlet extends BaseServlet {
             //而tomcat7默认为iso-8859-1
             rname = new String(rnameStr.getBytes("iso-8859-1"),"utf-8");
         }
-        int cid = 1;
-        if(cidStr!=null && cidStr.length()>0){
+        int cid = 0;
+        if(cidStr!=null && cidStr.length()>0 && "null".equals(cid)){
             cid = Integer.parseInt(cidStr);
         }
         int currentPage = 0;    //当前页码，若没传递，默认第一页

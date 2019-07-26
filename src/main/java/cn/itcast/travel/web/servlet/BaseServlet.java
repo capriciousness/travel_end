@@ -88,7 +88,7 @@ public class BaseServlet extends HttpServlet {
         if(checkcode_server == null || !checkcode_server.equalsIgnoreCase(check)){
             //验证码错误
             ResultInfo info = new ResultInfo();
-            //登录失败
+            //登录失败或者注册失败
             info.setFlag(false);
             info.setErrorMsg("验证码错误");
             //将info对象序列化为json
