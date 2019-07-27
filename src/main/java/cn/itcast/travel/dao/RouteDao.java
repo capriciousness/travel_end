@@ -21,4 +21,5 @@ public interface RouteDao {
      */
     public List<Route> findByPage(int cid,int start,int pageSize,String rname);
 
+    public Route findOne(int rid);
 }

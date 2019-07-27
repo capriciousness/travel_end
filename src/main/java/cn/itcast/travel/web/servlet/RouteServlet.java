@@ -2,6 +2,7 @@ package cn.itcast.travel.web.servlet;
 
 import cn.itcast.travel.domain.PageBean;
 import cn.itcast.travel.domain.Route;
+import cn.itcast.travel.domain.RouteImg;
 import cn.itcast.travel.service.RouteService;
 import cn.itcast.travel.service.impl.RouteServiceImpl;
 
@@ -11,11 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/route/*")
 public class RouteServlet extends BaseServlet {
     private RouteService service = new RouteServiceImpl();
-    //分页展示分类条目
+    //分页展示分类的旅游线路
     public void pageQuery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //1.获取参数
         String currentPageStr = request.getParameter("currentPage");
@@ -55,5 +57,16 @@ public class RouteServlet extends BaseServlet {
 
     }
 
+    //查询一个完整route对象
+    public void findOne(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //1.接收线路id,rid
+        String rid = request.getParameter("rid");
+        //2.调用service查询
+        //2.1查询一个route对象
+        Route route = service.findOne(rid);
 
+        //3.响应数据
+        writeValue(route,response);
+
+    }
 }
