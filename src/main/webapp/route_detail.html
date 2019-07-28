@@ -286,7 +286,13 @@
                 if(flag){
                     //用户已经收藏
                     $("#favorite").addClass("btn already");
-                    $("#favorite").prop("disabled",disabled);
+                    //设置固有属性prop
+                    //$("#favorite").prop("disabled","disabled");
+                    //设置部分固有属性和自定义属性
+                    $("#favorite").attr("disabled","disabled");
+
+                    //删除按钮的点击事件
+                    $("#favorite").removeAttr("onclick");
                 }else{
                     //用户未收藏
                 }
@@ -303,7 +309,8 @@
             if(user){
                 //用户已经登录
                 $.get("route/addFavorite",{rid:rid},function () {
-
+                    //手动刷新页面
+                    location.reload();
                 });
             }else{
                 //用户未登录
