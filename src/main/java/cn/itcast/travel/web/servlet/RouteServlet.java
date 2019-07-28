@@ -3,7 +3,10 @@ package cn.itcast.travel.web.servlet;
 import cn.itcast.travel.domain.PageBean;
 import cn.itcast.travel.domain.Route;
 import cn.itcast.travel.domain.RouteImg;
+import cn.itcast.travel.domain.User;
+import cn.itcast.travel.service.FavoriteService;
 import cn.itcast.travel.service.RouteService;
+import cn.itcast.travel.service.impl.FavoriteServiceImpl;
 import cn.itcast.travel.service.impl.RouteServiceImpl;
 
 import javax.servlet.ServletException;
@@ -16,7 +19,8 @@ import java.util.List;
 
 @WebServlet("/route/*")
 public class RouteServlet extends BaseServlet {
-    private RouteService service = new RouteServiceImpl();
+    private RouteService routeService = new RouteServiceImpl();
+    private FavoriteService favoriteService = new FavoriteServiceImpl();
     //分页展示分类的旅游线路
     public void pageQuery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //1.获取参数
@@ -51,7 +55,7 @@ public class RouteServlet extends BaseServlet {
         }
 
         //3.调用service查询PageBean对象
-        PageBean<Route> pageBean = service.pageQuery(cid, currentPage, pageSize,rname);
+        PageBean<Route> pageBean = routeService.pageQuery(cid, currentPage, pageSize,rname);
         //4.将PageBean对象序列化为json，返回给客户端
         writeValue(pageBean,response);
 
@@ -63,10 +67,33 @@ public class RouteServlet extends BaseServlet {
         String rid = request.getParameter("rid");
         //2.调用service查询
         //2.1查询一个route对象
-        Route route = service.findOne(rid);
+        Route route = routeService.findOne(rid);
 
         //3.响应数据
         writeValue(route,response);
+
+    }
+
+    //判断用户是否收藏
+    public void isFavorite(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //1.接收线路id,rid
+        String rid = request.getParameter("rid");
+        //1.1接收用户id，uid
+        User user = (User) request.getSession().getAttribute("user");
+        int uid = 0;
+        if(user != null){
+            //用户已登录
+            uid = user.getUid();
+        }else{
+            //用户未登录
+            uid = 0;
+        }
+        //2.调用service查询判断
+        boolean flag =  favoriteService.isFavorite(rid,uid);
+
+        //3.响应数据
+        writeValue(flag,response);
+
 
     }
 }

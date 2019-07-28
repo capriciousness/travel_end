@@ -11,7 +11,7 @@ public class SellerDaoImpl implements SellerDao {
     JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
     @Override
-    public Seller findByRid(int sid) {
+    public Seller findBySid(int sid) {
         //1.定义sql语句
         String sql = "select * from tab_seller where sid = ? ";
         //2.执行sql

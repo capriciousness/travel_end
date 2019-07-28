@@ -48,7 +48,7 @@ public class RouteServiceImpl implements RouteService {
         //2.根据route的rid查询一个route_image集合
         List<RouteImg> routeImgList = routeImgDao.findByRid(route.getRid());
         //3.根据route的sid查询一个seller商家对象
-        Seller seller = sellerDao.findByRid(route.getSid());
+        Seller seller = sellerDao.findBySid(route.getSid());
         //4.设置route的各项值
         route.setRouteImgList(routeImgList);
         route.setSeller(seller);
