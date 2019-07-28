@@ -1,8 +1,10 @@
 package cn.itcast.travel.service.impl;
 
+import cn.itcast.travel.dao.FavoriteDao;
 import cn.itcast.travel.dao.RouteDao;
 import cn.itcast.travel.dao.RouteImgDao;
 import cn.itcast.travel.dao.SellerDao;
+import cn.itcast.travel.dao.impl.FavoriteDaoImpl;
 import cn.itcast.travel.dao.impl.RouteDaoImpl;
 import cn.itcast.travel.dao.impl.RouteImgDaoImpl;
 import cn.itcast.travel.dao.impl.SellerDaoImpl;
@@ -18,6 +20,7 @@ public class RouteServiceImpl implements RouteService {
     private RouteDao routeDao = new RouteDaoImpl();
     private RouteImgDao routeImgDao = new RouteImgDaoImpl();
     private SellerDao sellerDao = new SellerDaoImpl();
+    private FavoriteDao favoriteDao = new FavoriteDaoImpl();
 
     //根据cid分页查询旅游线路
     @Override
@@ -49,6 +52,9 @@ public class RouteServiceImpl implements RouteService {
         List<RouteImg> routeImgList = routeImgDao.findByRid(route.getRid());
         //3.根据route的sid查询一个seller商家对象
         Seller seller = sellerDao.findBySid(route.getSid());
+        //6.补充查询该线路收藏次数
+        int count = favoriteDao.findFavoriteCount(route.getRid());
+        route.setCount(count);
         //4.设置route的各项值
         route.setRouteImgList(routeImgList);
         route.setSeller(seller);

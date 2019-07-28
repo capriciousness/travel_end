@@ -86,7 +86,7 @@ public class RouteServlet extends BaseServlet {
             uid = user.getUid();
         }else{
             //用户未登录
-            uid = 0;
+            return;
         }
         //2.调用service查询判断
         boolean flag =  favoriteService.isFavorite(rid,uid);
@@ -94,6 +94,26 @@ public class RouteServlet extends BaseServlet {
         //3.响应数据
         writeValue(flag,response);
 
+    }
+
+    //添加收藏
+    public void addFavorite(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //1.接收线路id,rid
+        String rid = request.getParameter("rid");
+        //1.1接收用户id，uid
+        User user = (User) request.getSession().getAttribute("user");
+        int uid = 0;
+        if(user != null){
+            //用户已登录
+            uid = user.getUid();
+        }else{
+            //用户未登录
+            return;
+        }
+        //2.调用service查询判断
+        favoriteService.add(rid,uid);
 
     }
+
+
 }

@@ -14,4 +14,10 @@ public class FavoriteServiceImpl implements FavoriteService {
 
         return favorite!=null;
     }
+
+    //添加收藏
+    @Override
+    public void add(String rid, int uid) {
+        favoriteDao.add(Integer.parseInt(rid),uid);
+    }
 }

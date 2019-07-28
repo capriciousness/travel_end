@@ -21,4 +21,23 @@ public class FavoriteDaoImpl implements FavoriteDao {
         }
         return favorite;
     }
+
+    @Override
+    public int findFavoriteCount(int rid) {
+        String sql = " select count(*) from tab_favorite where rid=? ";
+        int count = 0;
+        try {
+            count = template.queryForObject(sql, Integer.class, rid);
+        } catch (DataAccessException e) {
+
+        }
+        return count;
+    }
+
+    //添加收藏
+    @Override
+    public void add(int rid, int uid) {
+        String sql = " insert into tab_favorite values(?,?,?) ";
+        template.update(sql,rid,uid);
+    }
 }
