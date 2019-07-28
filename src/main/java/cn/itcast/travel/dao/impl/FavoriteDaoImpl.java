@@ -7,6 +7,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.Date;
+
 public class FavoriteDaoImpl implements FavoriteDao {
     JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
     //根据uid、rid查询Favorite对象
@@ -38,6 +40,6 @@ public class FavoriteDaoImpl implements FavoriteDao {
     @Override
     public void add(int rid, int uid) {
         String sql = " insert into tab_favorite values(?,?,?) ";
-        template.update(sql,rid,uid);
+        template.update(sql,rid,new Date(),uid);
     }
 }
